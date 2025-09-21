@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
@@ -17,12 +18,12 @@ interface LandingPageProps {
 const ADMIN_EMAIL = "admin@bluecrew.com";
 const ADMIN_PASSWORD = "adminpass123";
 
-export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPageProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
       if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         setIsAdmin(true);
         setError("");
+        router.push("/dashboard");
       } else {
         setIsAdmin(false);
         setError("Invalid credentials. Only admin login is allowed.");
@@ -39,33 +41,7 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
     }, 1000);
   };
 
-  if (isAdmin) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col">
-        <header className="border-b border-border bg-card">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">BC</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">BlueCrew</span>
-            </div>
-          </div>
-        </header>
-        <main className="flex-1 flex items-center justify-center px-4 py-12">
-          <Card className="w-full max-w-md">
-            <CardHeader className="space-y-1">
-              <CardTitle className="text-2xl font-bold text-center">Welcome, Admin!</CardTitle>
-              <CardDescription className="text-center">You have access to the admin page.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-center">This is a protected admin area.</p>
-            </CardContent>
-          </Card>
-        </main>
-      </div>
-    );
-  }
+  // Remove isAdmin UI, redirect handled above
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -161,7 +137,7 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-            <p className="text-sm text-muted-foreground">© 2024 BlueCrew. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© 2025 BlueCrew. All rights reserved.</p>
             <div className="flex space-x-4">
               <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
                 Privacy Policy
