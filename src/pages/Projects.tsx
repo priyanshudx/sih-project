@@ -509,7 +509,7 @@ const Projects: React.FC = () => {
 
             <div className="p-6 space-y-8">
               {/* Key Metrics Summary Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
                   <div className="flex items-center justify-between">
                     <div>
@@ -540,16 +540,6 @@ const Projects: React.FC = () => {
                       <p className="text-teal-600 text-xs">tCO₂e</p>
                     </div>
                     <FaChartLine className="w-8 h-8 text-teal-500" />
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-6 border border-emerald-200">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-emerald-600 text-sm font-medium">Survival Rate</p>
-                      <p className="text-2xl font-bold text-emerald-800">92%</p>
-                    </div>
-                    <FaPercentage className="w-8 h-8 text-emerald-500" />
                   </div>
                 </div>
               </div>
@@ -615,22 +605,7 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Latest Drone Image */}
-                <div className="bg-white rounded-lg border border-gray-200 p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold text-gray-900 flex items-center">
-                      <FaPlane className="w-5 h-5 text-blue-600 mr-2" />
-                      Latest Drone Survey
-                    </h4>
-                    <span className="text-sm text-gray-600">Nov 15, 2024</span>
-                  </div>
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 rounded-lg border border-blue-200 flex items-center justify-center">
-                    <div className="text-center">
-                      <FaPlane className="w-16 h-16 text-blue-500 mx-auto mb-2" />
-                      <p className="text-blue-700 font-medium">Latest Aerial Survey</p>
-                    </div>
-                  </div>
-                </div>
+
 
                 {/* Activity Log */}
                 <div className="bg-white rounded-lg border border-gray-200 p-6">
