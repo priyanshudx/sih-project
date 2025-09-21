@@ -41,7 +41,7 @@ const Credits: React.FC = () => {
 
   const [showIssueModal, setShowIssueModal] = useState(false)
   const [showTransferModal, setShowTransferModal] = useState(false)
-  const [showRetireModal, setShowRetireModal] = useState(false)
+  // Removed retire credits feature
   const [showFilterModal, setShowFilterModal] = useState(false)
   const [selectedCredit, setSelectedCredit] = useState<any>(null)
 
@@ -55,11 +55,7 @@ const Credits: React.FC = () => {
     recipientAddress: "",
     amount: "",
   })
-  const [retireForm, setRetireForm] = useState({
-    creditId: "",
-    amount: "",
-    reason: "",
-  })
+  // Removed retire credits feature
 
   const [filters, setFilters] = useState({
     status: "all",
@@ -224,34 +220,6 @@ const Credits: React.FC = () => {
     }
   }
 
-  const handleRetireCredits = async () => {
-    if (!retireForm.creditId || !retireForm.amount) return
-
-    setIsLoading(true)
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      const newTransaction = {
-        id: `tx_${Date.now()}`,
-        hash: `0x${Math.random().toString(16).substr(2, 40)}`,
-        type: "Retire Credits",
-        amount: Number.parseInt(retireForm.amount),
-        creditId: retireForm.creditId,
-        timestamp: new Date().toISOString(),
-        status: "Confirmed",
-        gasUsed: "28,156",
-        blockNumber: 18950000 + Math.floor(Math.random() * 1000),
-      }
-
-      setBlockchainTransactions((prev) => [newTransaction, ...prev])
-      setRetireForm({ creditId: "", amount: "", reason: "" })
-      setShowRetireModal(false)
-    } catch (error) {
-      console.error("Failed to retire credits:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   const filteredCredits = credits.filter((credit) => {
     const matchesSearch =
@@ -611,30 +579,17 @@ const Credits: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
                       {credit.status === "Issued" && (
-                        <>
-                          <button
-                            onClick={() => {
-                              setSelectedCredit(credit)
-                              setRetireForm({ ...retireForm, creditId: credit.id })
-                              setShowRetireModal(true)
-                            }}
-                            className="text-destructive hover:text-destructive/80 p-1 rounded"
-                            title="Retire Credit"
-                          >
-                            <FaBan className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setSelectedCredit(credit)
-                              setTransferForm({ ...transferForm, creditId: credit.id })
-                              setShowTransferModal(true)
-                            }}
-                            className="text-accent hover:text-accent/80 p-1 rounded"
-                            title="Transfer Credit"
-                          >
-                            <FaExchangeAlt className="w-4 h-4" />
-                          </button>
-                        </>
+                        <button
+                          onClick={() => {
+                            setSelectedCredit(credit)
+                            setTransferForm({ ...transferForm, creditId: credit.id })
+                            setShowTransferModal(true)
+                          }}
+                          className="text-accent hover:text-accent/80 p-1 rounded"
+                          title="Transfer Credit"
+                        >
+                          <FaExchangeAlt className="w-4 h-4" />
+                        </button>
                       )}
                       <button
                         onClick={() => setSelectedCredit(credit)}
@@ -840,62 +795,6 @@ const Credits: React.FC = () => {
         </div>
       )}
 
-      {showRetireModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-card rounded-lg p-6 w-full max-w-md mx-4">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground">Retire Credits</h3>
-              <button onClick={() => setShowRetireModal(false)} className="text-muted-foreground hover:text-foreground">
-                <FaTimes className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Credit ID</label>
-                <input
-                  type="text"
-                  value={retireForm.creditId}
-                  onChange={(e) => setRetireForm({ ...retireForm, creditId: e.target.value })}
-                  className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
-                  placeholder="Enter credit ID"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Amount (tCO₂e)</label>
-                <input
-                  type="number"
-                  value={retireForm.amount}
-                  onChange={(e) => setRetireForm({ ...retireForm, amount: e.target.value })}
-                  className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
-                  placeholder="Enter amount"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1">Retirement Reason</label>
-                <textarea
-                  value={retireForm.reason}
-                  onChange={(e) => setRetireForm({ ...retireForm, reason: e.target.value })}
-                  className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
-                  placeholder="Enter reason for retirement"
-                  rows={3}
-                />
-              </div>
-
-              <button
-                onClick={handleRetireCredits}
-                disabled={isLoading || !retireForm.creditId || !retireForm.amount}
-                className="w-full inline-flex items-center justify-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
-              >
-                {isLoading ? <FaSpinner className="w-4 h-4 mr-2 animate-spin" /> : <FaBan className="w-4 h-4 mr-2" />}
-                {isLoading ? "Retiring..." : "Retire Credits"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showFilterModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
