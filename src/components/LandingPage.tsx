@@ -18,23 +18,20 @@ interface LandingPageProps {
 const ADMIN_EMAIL = "admin@bluecrew.com";
 const ADMIN_PASSWORD = "adminpass123";
 
+export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPageProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        setIsAdmin(true);
         setError("");
-        router.push("/dashboard");
+        await onLogin(email, password); // triggers AuthContext login, which shows dashboard
       } else {
-        setIsAdmin(false);
         setError("Invalid credentials. Only admin login is allowed.");
       }
       setIsLoading(false);
@@ -42,7 +39,6 @@ const ADMIN_PASSWORD = "adminpass123";
   };
 
   // Remove isAdmin UI, redirect handled above
-
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
