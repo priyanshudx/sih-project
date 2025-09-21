@@ -14,7 +14,8 @@ import Settings from "./pages/Settings"
 import LandingPage from "./components/LandingPage"
 import SignupPage from "./components/SignupPage"
 
-export type PageType = "dashboard" | "projects" | "credits" | "settings" | "marketplace"
+// export type PageType = "dashboard" | "projects" | "credits" | "settings" | "marketplace"
+export type PageType = "dashboard" | "projects" | "settings" // | "credits" | "marketplace"
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<PageType>("dashboard")
@@ -35,10 +36,6 @@ function AppContent() {
         return <Dashboard setCurrentPage={setCurrentPage} />;
       case "projects":
         return <Projects />;
-      case "credits":
-        return <Credits />;
-      case "marketplace":
-        return <Marketplace />;
       case "settings":
         return <Settings />;
       default:
@@ -48,7 +45,8 @@ function AppContent() {
 
   if (!isAuthenticated) {
     if (isSignupMode) {
-      return <SignupPage onSignup={handleSignup} onSwitchToLogin={() => setIsSignupMode(false)} />
+     // if (isSignupMode) {
+     //   return <SignupPage onSignup={handleSignup} onSwitchToLogin={() => setIsSignupMode(false)} />
     }
     return <LandingPage onLogin={handleLogin} onSwitchToSignup={() => setIsSignupMode(true)} />
   }

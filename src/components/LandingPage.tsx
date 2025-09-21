@@ -115,13 +115,14 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
                 </form>
 
                 <div className="mt-6 text-center space-y-2">
-                  
+                  {/*
                   <p className="text-sm text-muted-foreground">
                     Don't have an account?{" "}
                     <button onClick={onSwitchToSignup} className="text-primary hover:underline">
                       Sign up
                     </button>
                   </p>
+                  */}
                 </div>
               </CardContent>
             </Card>

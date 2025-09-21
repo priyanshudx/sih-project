@@ -160,6 +160,7 @@ const Settings: React.FC = () => {
           </div>
 
           {/* Preferences */}
+          {/*
           <div className="bg-card rounded-lg border border-border p-6">
             <div className="flex items-center justify-between">
               <span>Email Notifications</span>
@@ -175,6 +176,7 @@ const Settings: React.FC = () => {
               </button>
             </div>
           </div>
+          */}
 
           {/* Logout */}
           <div className="bg-card rounded-lg border border-border p-6 flex justify-between">

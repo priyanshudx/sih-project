@@ -121,6 +121,7 @@ const Dashboard: React.FC<DashboardProps> = ({ setCurrentPage }) => {
           </div>
         </div>
 
+        {/*
         <div className="bg-card rounded-lg border border-border p-6">
           <div className="flex items-center">
             <div className="flex-shrink-0">
@@ -137,15 +138,16 @@ const Dashboard: React.FC<DashboardProps> = ({ setCurrentPage }) => {
             </div>
           </div>
         </div>
+        */}
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        {/* Recent Projects */}
+        {/* All Projects */}
         <div className="lg:col-span-2">
           <div className="bg-card rounded-lg border border-border">
             <div className="px-6 py-4 border-b border-border">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-foreground">Recent Projects</h3>
+                <h3 className="text-lg font-semibold text-foreground">All Projects</h3>
                 <button
                   onClick={() => setCurrentPage("projects")}
                   className="text-sm text-primary hover:text-primary/80 font-medium"
