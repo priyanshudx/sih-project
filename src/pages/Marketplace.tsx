@@ -512,7 +512,7 @@ const Marketplace: React.FC = () => {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-muted-foreground">Total Value</label>
-                    <p className="text-foreground text-lg font-semibold text-accent">
+                    <p className="text-lg font-semibold text-accent">
                       {formatCurrency(selectedTransaction.totalValue)}
                     </p>
                   </div>

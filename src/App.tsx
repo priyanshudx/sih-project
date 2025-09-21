@@ -4,11 +4,13 @@ import { useState } from "react"
 import { AuthProvider, useAuth } from "./context/AuthContext"
 import { AppProvider } from "./context/AppContext"
 import Layout from "./components/Layout"
+// Removed broken imports for non-existent app/* components
+
 import Dashboard from "./pages/Dashboard"
 import Projects from "./pages/Projects"
 import Credits from "./pages/Credits"
-import Settings from "./pages/Settings"
 import Marketplace from "./pages/Marketplace"
+import Settings from "./pages/Settings"
 import LandingPage from "./components/LandingPage"
 import SignupPage from "./components/SignupPage"
 
@@ -30,17 +32,17 @@ function AppContent() {
   const renderPage = () => {
     switch (currentPage) {
       case "dashboard":
-        return <Dashboard setCurrentPage={setCurrentPage} />
+        return <Dashboard setCurrentPage={setCurrentPage} />;
       case "projects":
-        return <Projects />
+        return <Projects />;
       case "credits":
-        return <Credits />
-      case "settings":
-        return <Settings />
+        return <Credits />;
       case "marketplace":
-        return <Marketplace />
+        return <Marketplace />;
+      case "settings":
+        return <Settings />;
       default:
-        return <Dashboard setCurrentPage={setCurrentPage} />
+        return <div>Page not found or not implemented.</div>;
     }
   }
 
