@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, type ReactNode } from "react"
+import axiosInstance from "../lib/axiosInstance"
 
 interface User {
   email: string
@@ -25,17 +26,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Simple demo authentication - in real app, this would call an API
-    if (email && password) {
-      setUser({
-        email,
-        name: email.split("@")[0] || "User",
-        organization: "Blue Carbon Initiative",
-        role: "Marine Biologist",
-      })
-      return true
+    try {
+      const response = await axiosInstance.post("http://localhost:8080/api/login", { email, password })
+      const { token, user: userData } = response.data
+      if (token) {
+        localStorage.setItem("jwtToken", token)
+        setUser({
+          email: userData?.email || email,
+          name: userData?.name || email.split("@")[0] || "User",
+          organization: userData?.organization || "Blue Carbon Initiative",
+          role: userData?.role || "Marine Biologist",
+        })
+        return true
+      }
+      return false
+    } catch (error) {
+      return false
     }
-    return false
   }
 
   const signup = async (email: string, password: string, name: string): Promise<boolean> => {

@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -20,7 +19,6 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,26 +91,15 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
-                    <div className="relative">
-                      <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full pr-10"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute inset-y-0 right-0 px-3 flex items-center text-lg text-muted-foreground focus:outline-none"
-                        tabIndex={-1}
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                      >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                      </button>
-                    </div>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full"
+                    />
                   </div>
                   {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
                   <Button type="submit" className="w-full" disabled={isLoading}>
