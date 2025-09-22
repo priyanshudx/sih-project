@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -10,32 +11,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../..
 import { Label } from "../../components/ui/label"
 
 interface LandingPageProps {
-  onLogin: (email: string, password: string) => void
+  onLogin: (email: string, password: string) => Promise<boolean>
   onSwitchToSignup: () => void
 }
-
-
-const ADMIN_EMAIL = "admin@bluecrew.com";
-const ADMIN_PASSWORD = "adminpass123";
 
 export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPageProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(async () => {
-      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        setError("");
-        await onLogin(email, password); // triggers AuthContext login, which shows dashboard
-      } else {
-        setError("Invalid credentials. Only admin login is allowed.");
-      }
-      setIsLoading(false);
-    }, 1000);
+    setError("");
+    const success = await onLogin(email, password);
+    if (!success) {
+      setError("Invalid credentials. Please try again.");
+    }
+    setIsLoading(false);
   };
 
   // Remove isAdmin UI, redirect handled above
@@ -98,15 +93,26 @@ export default function LandingPage({ onLogin, onSwitchToSignup }: LandingPagePr
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="w-full"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute inset-y-0 right-0 px-3 flex items-center text-lg text-muted-foreground focus:outline-none"
+                        tabIndex={-1}
+                        aria-label={showPassword ? "Hide password" : "Show password"}
+                      >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      </button>
+                    </div>
                   </div>
                   {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
                   <Button type="submit" className="w-full" disabled={isLoading}>
