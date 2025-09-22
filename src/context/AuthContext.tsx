@@ -25,24 +25,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
+  // Hardcoded admin login (mock data, no API)
   const login = async (email: string, password: string): Promise<boolean> => {
-    try {
-      const response = await axiosInstance.post("http://localhost:8080/api/login", { email, password })
-      const { token, user: userData } = response.data
-      if (token) {
-        localStorage.setItem("jwtToken", token)
-        setUser({
-          email: userData?.email || email,
-          name: userData?.name || email.split("@")[0] || "User",
-          organization: userData?.organization || "Blue Carbon Initiative",
-          role: userData?.role || "Marine Biologist",
-        })
-        return true
-      }
-      return false
-    } catch (error) {
-      return false
+    // Only allow admin@bluecrew.com / adminpass123
+    if (email === "admin@bluecrew.com" && password === "adminpass123") {
+      setUser({
+        email: "admin@bluecrew.com",
+        name: "Admin User",
+        organization: "Blue Carbon Initiative",
+        role: "Administrator",
+      })
+      return true;
     }
+    return false;
   }
 
   const signup = async (email: string, password: string, name: string): Promise<boolean> => {

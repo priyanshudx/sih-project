@@ -67,9 +67,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [projects, setProjects] = useState<Project[]>([
     {
       id: "1",
-      name: "Mangrove Restoration Bay Area",
+      name: "Mangrove Restoration Sundarbans",
       type: "Mangrove",
-      location: "Florida Keys, USA",
+      location: "Sundarbans, West Bengal, India",
       area: 150,
       status: "Approved",
       estimatedCarbon: 2250,
@@ -81,13 +81,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         monitoringFrequency: "Quarterly",
       },
       notes:
-        "This project focuses on restoring 150 hectares of mangrove ecosystem in the Florida Keys. The restoration includes replanting native mangrove species and removing invasive vegetation. Expected to sequester significant amounts of blue carbon while providing coastal protection.",
+        "This project focuses on restoring 150 hectares of mangrove ecosystem in the Sundarbans. The restoration includes replanting native mangrove species and removing invasive vegetation. Expected to sequester significant amounts of blue carbon while providing coastal protection.",
     },
     {
       id: "2",
-      name: "Seagrass Conservation Project",
+      name: "Seagrass Conservation Gulf of Mannar",
       type: "Seagrass",
-      location: "Chesapeake Bay, USA",
+      location: "Gulf of Mannar, Tamil Nadu, India",
       area: 200,
       status: "Pending",
       estimatedCarbon: 1800,
@@ -99,13 +99,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         monitoringFrequency: "Monthly",
       },
       notes:
-        "Large-scale seagrass restoration in Chesapeake Bay focusing on Zostera marina. Project includes water quality monitoring and community engagement components.",
+        "Large-scale seagrass restoration in the Gulf of Mannar focusing on Halophila ovalis. Project includes water quality monitoring and community engagement components.",
     },
     {
       id: "3",
-      name: "Saltmarsh Restoration Initiative",
+      name: "Saltmarsh Restoration Bhitarkanika",
       type: "Saltmarsh",
-      location: "San Francisco Bay, USA",
+      location: "Bhitarkanika, Odisha, India",
       area: 120,
       status: "Approved",
       estimatedCarbon: 1680,
@@ -117,13 +117,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         monitoringFrequency: "Bi-monthly",
       },
       notes:
-        "Restoration of degraded saltmarsh habitat with native plant species. Includes sediment management and invasive species control.",
+        "Restoration of degraded saltmarsh habitat with native plant species in Bhitarkanika. Includes sediment management and invasive species control.",
     },
     {
       id: "4",
-      name: "Coastal Wetland Protection",
+      name: "Coastal Wetland Protection Gujarat",
       type: "Mangrove",
-      location: "Louisiana Coast, USA",
+      location: "Gulf of Kutch, Gujarat, India",
       area: 300,
       status: "Rejected",
       estimatedCarbon: 4500,
@@ -135,13 +135,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         monitoringFrequency: "Quarterly",
       },
       notes:
-        "Large-scale coastal protection project. Rejected due to insufficient baseline data. Resubmission planned with additional monitoring data.",
+        "Large-scale coastal protection project in the Gulf of Kutch. Rejected due to insufficient baseline data. Resubmission planned with additional monitoring data.",
     },
     {
       id: "5",
-      name: "Blue Carbon Research Site",
+      name: "Blue Carbon Research Chilika Lake",
       type: "Seagrass",
-      location: "Monterey Bay, USA",
+      location: "Chilika Lake, Odisha, India",
       area: 80,
       status: "Pending",
       estimatedCarbon: 720,
@@ -153,7 +153,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         monitoringFrequency: "Weekly",
       },
       notes:
-        "Research-focused project studying blue carbon sequestration rates in seagrass meadows. Includes advanced monitoring equipment and data collection.",
+        "Research-focused project studying blue carbon sequestration rates in seagrass meadows of Chilika Lake. Includes advanced monitoring equipment and data collection.",
     },
   ])
 

@@ -30,8 +30,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, setCurrentPage }
   const navigation = [
     { name: "Dashboard", page: "dashboard" as PageType, icon: FaHome },
     { name: "Projects", page: "projects" as PageType, icon: FaProjectDiagram },
-      // { name: "Credits", page: "credits" as PageType, icon: FaCertificate },
-      // { name: "Marketplace", page: "marketplace" as PageType, icon: FaStore },
+    { name: "Credits", page: "credits" as PageType, icon: FaCertificate },
+    { name: "Marketplace", page: "marketplace" as PageType, icon: FaStore },
     { name: "Settings", page: "settings" as PageType, icon: FaCog },
   ]
 

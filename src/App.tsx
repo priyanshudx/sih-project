@@ -15,7 +15,7 @@ import LandingPage from "./components/LandingPage"
 import SignupPage from "./components/SignupPage"
 
 // export type PageType = "dashboard" | "projects" | "credits" | "settings" | "marketplace"
-export type PageType = "dashboard" | "projects" | "settings" // | "credits" | "marketplace"
+export type PageType = "dashboard" | "projects" | "credits" | "marketplace" | "settings"
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<PageType>("dashboard")
@@ -23,7 +23,7 @@ function AppContent() {
   const { isAuthenticated, login, signup } = useAuth()
 
   const handleLogin = async (email: string, password: string) => {
-    await login(email, password)
+    return await login(email, password)
   }
 
   const handleSignup = async (email: string, password: string, name: string) => {
@@ -36,6 +36,10 @@ function AppContent() {
         return <Dashboard setCurrentPage={setCurrentPage} />;
       case "projects":
         return <Projects />;
+      case "credits":
+        return <Credits />;
+      case "marketplace":
+        return <Marketplace />;
       case "settings":
         return <Settings />;
       default:

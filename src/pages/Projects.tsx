@@ -27,6 +27,16 @@ import {
 
 const Projects: React.FC = () => {
   const { projects, updateProject } = useApp()
+  const [_, setForceUpdate] = useState(0) // force re-render after delete
+  // Delete project handler
+  const handleDeleteProject = (projectId: string) => {
+    // Remove project from context (mock, since no API)
+    const index = projects.findIndex((p) => p.id === projectId)
+    if (index !== -1) {
+      projects.splice(index, 1)
+      setForceUpdate((n) => n + 1)
+    }
+  }
   const [statusFilter, setStatusFilter] = useState<string>("All")
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
   const [editingProject, setEditingProject] = useState<string | null>(null)
@@ -221,6 +231,7 @@ const Projects: React.FC = () => {
                         <FaEdit className="w-4 h-4" />
                       </button>
                       <button
+                        onClick={() => handleDeleteProject(project.id)}
                         className="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-colors"
                         title="Delete Project"
                       >
